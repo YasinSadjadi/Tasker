@@ -20,7 +20,27 @@ public class User : Entity, IDeactivable
     public LastName LastName { get; private set; }
     public EmailAddress EmailAddress { get; private set; }
 
-    public bool IsActive { get; set; }
+    public bool IsActive { get; private set; }
+
+    public void Deactive()
+    {
+        if (IsActive)
+            IsActive = false;
+        else
+            throw new InvalidOperationException();
+
+        RaiseDomainEvent(new UserActivatedDomainEvent(Id));
+    }
+
+    public void Active()
+    {
+        if (!IsActive)
+            IsActive = true;
+        else
+            throw new InvalidOperationException();
+
+        RaiseDomainEvent(new UserDeactivatedDomainEvent(Id));
+    }
 
     public static User Create(FirstName firstName, LastName lastName, EmailAddress emailAddress)
     {

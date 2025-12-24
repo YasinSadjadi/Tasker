@@ -2,5 +2,8 @@
 
 public interface IDeactivable
 {
-    bool IsActive { get; set; }
+    bool IsActive { get; }
+
+    void Deactive();
+    void Active();
 }
