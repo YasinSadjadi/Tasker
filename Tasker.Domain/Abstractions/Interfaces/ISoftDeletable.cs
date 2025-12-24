@@ -1,4 +1,4 @@
-﻿namespace Tasker.Domain.Interfaces;
+﻿namespace Tasker.Domain.Abstractions.Interfaces;
 
 public interface ISoftDeletable
 {

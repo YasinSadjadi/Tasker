@@ -2,7 +2,7 @@
 
 namespace Tasker.DataAccess.Interfaces;
 
-public interface IGenericRepository<T> where T : BaseEntity
+public interface IGenericRepository<T> where T : Entity
 {
     void Add(T entity);
     Task AddAsync(T entity, CancellationToken cancellationToken);

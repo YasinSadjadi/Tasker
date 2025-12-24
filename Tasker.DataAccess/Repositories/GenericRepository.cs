@@ -6,7 +6,7 @@ using Tasker.Domain.Entities;
 
 namespace Tasker.DataAccess.Repositories;
 
-public class GenericRepository<T>(AppDbContext context) : IGenericRepository<T> where T : BaseEntity
+public class GenericRepository<T>(AppDbContext context) : IGenericRepository<T> where T : Entity
 {
     public void Add(T entity)
     {

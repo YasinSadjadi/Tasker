@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Tasker.Domain.Entities;
+using Tasker.Domain.Entities.Task;
+using Tasker.Domain.Entities.User;
 
 namespace Tasker.DataAccess.Database;
 

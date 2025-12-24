@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Tasker.Domain.Entities;
+using Tasker.Domain.Entities.Task;
 
 namespace Tasker.DataAccess.Database.EntityConfigurations;
 

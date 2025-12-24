@@ -63,8 +63,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Tasker.DataAccess\Tasker.DataAccess.csproj" />
-  </ItemGroup>
-
 </Project>

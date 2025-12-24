@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Tasker.Helper\Tasker.Helper.csproj" />
+    <Folder Include="Entities\User\Events\" />
   </ItemGroup>
 
 </Project>
