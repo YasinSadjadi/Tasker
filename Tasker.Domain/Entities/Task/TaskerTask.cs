@@ -1,17 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Tasker.Domain.Abstractions.Interfaces;
 using Tasker.Domain.Entities.Task.Events;
+using Tasker.Domain.Shared;
 
 namespace Tasker.Domain.Entities.Task;
 
-[Index(nameof(Title))]
 public class TaskerTask : Entity, ISoftDeletable
 {
-    private TaskerTask(Title title, DueDate dueDate, Description description, Guid id) : base(id)
+    private TaskerTask(Title title, DueDate dueDate, Description description, Guid id, StateChangeLog cancelledDate,
+        StateChangeLog completedDate, StateChangeLog deletedDate) : base(id)
     {
         Title = title;
         DueDate = dueDate;
         Description = description;
+        CancelledDate = cancelledDate;
+        CompletedDate = completedDate;
+        DeletedDate = deletedDate;
     }
 
     public virtual Title Title { get; private set; }
@@ -21,14 +25,17 @@ public class TaskerTask : Entity, ISoftDeletable
     public TaskerTaskStatus Status { get; private set; } = TaskerTaskStatus.Pending;
     public TaskPriority Priority { get; private set; } = TaskPriority.Low;
 
-    public DateTime CancelledDate { get => field.ToLocalTime(); private set; }
-    public DateTime CompletedDate { get => field.ToLocalTime(); private set; }
+    public StateChangeLog CancelledDate { get; private set; }
+    public StateChangeLog CompletedDate { get; private set; }
+    public StateChangeLog DeletedDate { get; private set; }
 
-    public bool IsDeleted { get; set; } = false;
+    public bool IsDeleted { get; private set; }
 
     public virtual TaskerTask Create(Title title, DueDate dueDate, Description description)
     {
-        var task = new TaskerTask(title, dueDate, description, Guid.NewGuid());
+        var task = new TaskerTask(title, dueDate, description, Guid.NewGuid(),
+            StateChangeLog.Empty(), StateChangeLog.Empty(),
+            StateChangeLog.Empty());
 
         RaiseDomainEvent(new CreatedTaskDomainEvent(task.Id));
 
@@ -49,7 +56,7 @@ public class TaskerTask : Entity, ISoftDeletable
 
     public void Cancel()
     {
-        CancelledDate = DateTime.UtcNow;
+        CancelledDate = StateChangeLog.Create();
         Status = TaskerTaskStatus.Cancelled;
 
         RaiseDomainEvent(new TaskCancelledDomainEvent(Id));
@@ -57,9 +64,17 @@ public class TaskerTask : Entity, ISoftDeletable
 
     public void Complete()
     {
-        CompletedDate = DateTime.UtcNow;
+        CompletedDate = StateChangeLog.Create();
         Status = TaskerTaskStatus.Completed;
 
         RaiseDomainEvent(new TaskCompleteDomainEvent(Id));
+    }
+
+    public void Delete()
+    {
+        IsDeleted = true;
+        DeletedDate = StateChangeLog.Create();
+
+        RaiseDomainEvent(new TaskDeletedDomainEvent(Id));
     }
 }
