@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Tasker.Domain.Abstractions.Interfaces;
+﻿using Tasker.Domain.Abstractions.Interfaces;
 using Tasker.Domain.Entities.Task.Events;
 using Tasker.Domain.Shared;
 

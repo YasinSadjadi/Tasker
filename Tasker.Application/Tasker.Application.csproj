@@ -7,13 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Tasker.DataAccess\Tasker.DataAccess.csproj" />
-    <ProjectReference Include="..\Tasker.Domain\Tasker.Domain.csproj" />
+    <Folder Include="Abstraction\Behaviors\" />
+    <Folder Include="Abstraction\Clocks\" />
+    <Folder Include="Abstraction\Email\" />
+    <Folder Include="TaskerTask\Commands\" />
+    <Folder Include="User\Commands\" />
+    <Folder Include="User\Queries\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Inputs\" />
-    <Folder Include="Commands\" />
+    <PackageReference Include="Dapper" Version="2.1.66" />
+    <PackageReference Include="MediatR" Version="14.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tasker.Domain\Tasker.Domain.csproj" />
   </ItemGroup>
 
 </Project>

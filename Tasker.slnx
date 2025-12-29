@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/src/">
+    <Project Path="Tasker.Application/Tasker.Application.csproj" Id="0a85fed2-8c96-4d1d-9abd-6ba1e7a4e913" />
     <Project Path="Tasker.Domain/Tasker.Domain.csproj" />
   </Folder>
   <Folder Name="/test/" />

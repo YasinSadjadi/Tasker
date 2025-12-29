@@ -1,6 +1,6 @@
 ﻿namespace Tasker.Domain.Entities.Task;
 
-public enum TaskPriority
+public enum TaskPriority : byte
 {
     Low,
     Medium,
